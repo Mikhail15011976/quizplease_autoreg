@@ -1,0 +1,1233 @@
+2025-06-10 13:39:57,342 - INFO - Запуск парсера QuizPlease
+2025-06-10 13:39:58,440 - INFO - Доступных классических игр не найдено
+2025-06-10 13:43:26,395 - INFO - Работа парсера остановлена пользователем
+2025-06-10 13:43:26,396 - INFO - Парсер завершил работу
+2025-06-10 15:49:56,615 - INFO - Найдено доступных игр: 0
+2025-06-10 17:12:01,388 - INFO - Начинаем тестовый парсинг...
+2025-06-10 17:12:02,395 - INFO - Найдено доступных игр: 2
+2025-06-10 17:12:02,396 - INFO - Найдено игр: 2
+2025-06-10 17:12:02,396 - INFO - Игра: Квиз, плиз! KLG | Дата: 10 июня, Вторник | Время: Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни!
+2025-06-10 17:12:02,398 - INFO - Игра: Квиз, плиз! KLG | Дата: 15 июня, Воскресенье | Время: Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни!
+2025-06-10 17:12:02,398 - INFO - 
+Пытаемся записаться на игру: Квиз, плиз! KLG 10 июня, Вторник
+2025-06-10 17:12:02,398 - INFO - 
+
+2025-06-10 17:12:02,398 - INFO - ====== WebDriver manager ======
+2025-06-10 17:12:03,423 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:12:03,423 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:12:03,423 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:12:04,081 - INFO - There is no [win32] chromedriver for browser  in cache
+2025-06-10 17:12:04,082 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:12:05,975 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:12:20,078 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0121A813+48355]
+	(No symbol) [0x011AC4B1]
+	(No symbol) [0x010B5358]
+	(No symbol) [0x010D1A9E]
+	(No symbol) [0x010D0579]
+	(No symbol) [0x01100C55]
+	(No symbol) [0x0110093C]
+	(No symbol) [0x010FA536]
+	(No symbol) [0x010D82DC]
+	(No symbol) [0x010D93DD]
+	GetHandleVerifier [0x0147AABD+2539405]
+	GetHandleVerifier [0x014BA78F+2800735]
+	GetHandleVerifier [0x014B456C+2775612]
+	GetHandleVerifier [0x012A51E0+616112]
+	(No symbol) [0x011B5F8C]
+	(No symbol) [0x011B2328]
+	(No symbol) [0x011B240B]
+	(No symbol) [0x011A4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 92, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 11, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0121A813+48355]
+	(No symbol) [0x011AC4B1]
+	(No symbol) [0x010B5358]
+	(No symbol) [0x010D1A9E]
+	(No symbol) [0x010D0579]
+	(No symbol) [0x01100C55]
+	(No symbol) [0x0110093C]
+	(No symbol) [0x010FA536]
+	(No symbol) [0x010D82DC]
+	(No symbol) [0x010D93DD]
+	GetHandleVerifier [0x0147AABD+2539405]
+	GetHandleVerifier [0x014BA78F+2800735]
+	GetHandleVerifier [0x014B456C+2775612]
+	GetHandleVerifier [0x012A51E0+616112]
+	(No symbol) [0x011B5F8C]
+	(No symbol) [0x011B2328]
+	(No symbol) [0x011B240B]
+	(No symbol) [0x011A4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:12:20,102 - INFO - Результат: Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0121A813+48355]
+	(No symbol) [0x011AC4B1]
+	(No symbol) [0x010B5358]
+	(No symbol) [0x010D1A9E]
+	(No symbol) [0x010D0579]
+	(No symbol) [0x01100C55]
+	(No symbol) [0x0110093C]
+	(No symbol) [0x010FA536]
+	(No symbol) [0x010D82DC]
+	(No symbol) [0x010D93DD]
+	GetHandleVerifier [0x0147AABD+2539405]
+	GetHandleVerifier [0x014BA78F+2800735]
+	GetHandleVerifier [0x014B456C+2775612]
+	GetHandleVerifier [0x012A51E0+616112]
+	(No symbol) [0x011B5F8C]
+	(No symbol) [0x011B2328]
+	(No symbol) [0x011B240B]
+	(No symbol) [0x011A4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:12:20,106 - INFO - Результат сохранен в data/last_status.txt
+2025-06-10 17:12:25,107 - INFO - 
+Пытаемся записаться на игру: Квиз, плиз! KLG 15 июня, Воскресенье
+2025-06-10 17:12:25,108 - INFO - 
+
+2025-06-10 17:12:25,108 - INFO - ====== WebDriver manager ======
+2025-06-10 17:12:26,447 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:12:26,448 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:12:26,448 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:12:27,176 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:12:29,863 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:12:32,673 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x005FA813+48355]
+	(No symbol) [0x0058C4B1]
+	(No symbol) [0x00495358]
+	(No symbol) [0x004B1A9E]
+	(No symbol) [0x004B0579]
+	(No symbol) [0x004E0C55]
+	(No symbol) [0x004E093C]
+	(No symbol) [0x004DA536]
+	(No symbol) [0x004B82DC]
+	(No symbol) [0x004B93DD]
+	GetHandleVerifier [0x0085AABD+2539405]
+	GetHandleVerifier [0x0089A78F+2800735]
+	GetHandleVerifier [0x0089456C+2775612]
+	GetHandleVerifier [0x006851E0+616112]
+	(No symbol) [0x00595F8C]
+	(No symbol) [0x00592328]
+	(No symbol) [0x0059240B]
+	(No symbol) [0x00584FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 92, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 11, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x005FA813+48355]
+	(No symbol) [0x0058C4B1]
+	(No symbol) [0x00495358]
+	(No symbol) [0x004B1A9E]
+	(No symbol) [0x004B0579]
+	(No symbol) [0x004E0C55]
+	(No symbol) [0x004E093C]
+	(No symbol) [0x004DA536]
+	(No symbol) [0x004B82DC]
+	(No symbol) [0x004B93DD]
+	GetHandleVerifier [0x0085AABD+2539405]
+	GetHandleVerifier [0x0089A78F+2800735]
+	GetHandleVerifier [0x0089456C+2775612]
+	GetHandleVerifier [0x006851E0+616112]
+	(No symbol) [0x00595F8C]
+	(No symbol) [0x00592328]
+	(No symbol) [0x0059240B]
+	(No symbol) [0x00584FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:12:32,679 - INFO - Результат: Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x005FA813+48355]
+	(No symbol) [0x0058C4B1]
+	(No symbol) [0x00495358]
+	(No symbol) [0x004B1A9E]
+	(No symbol) [0x004B0579]
+	(No symbol) [0x004E0C55]
+	(No symbol) [0x004E093C]
+	(No symbol) [0x004DA536]
+	(No symbol) [0x004B82DC]
+	(No symbol) [0x004B93DD]
+	GetHandleVerifier [0x0085AABD+2539405]
+	GetHandleVerifier [0x0089A78F+2800735]
+	GetHandleVerifier [0x0089456C+2775612]
+	GetHandleVerifier [0x006851E0+616112]
+	(No symbol) [0x00595F8C]
+	(No symbol) [0x00592328]
+	(No symbol) [0x0059240B]
+	(No symbol) [0x00584FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:12:32,680 - INFO - Результат сохранен в data/last_status.txt
+2025-06-10 17:41:37,294 - INFO - Запуск парсера квизов
+2025-06-10 17:41:37,294 - INFO - Проверка доступных игр (17:41:37)
+2025-06-10 17:41:38,181 - INFO - Найдено доступных игр: 2
+2025-06-10 17:41:38,181 - INFO - Найдено 2 подходящих игр
+2025-06-10 17:41:38,181 - INFO - Попытка регистрации на игру: 10 июня, Вторник Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (reserve)
+2025-06-10 17:41:38,182 - INFO - 
+
+2025-06-10 17:41:38,183 - INFO - ====== WebDriver manager ======
+2025-06-10 17:41:38,984 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:41:38,984 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:41:38,984 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:41:39,473 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:41:42,038 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:41:44,936 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0027A813+48355]
+	(No symbol) [0x0020C4B1]
+	(No symbol) [0x00115358]
+	(No symbol) [0x00131A9E]
+	(No symbol) [0x00130579]
+	(No symbol) [0x00160C55]
+	(No symbol) [0x0016093C]
+	(No symbol) [0x0015A536]
+	(No symbol) [0x001382DC]
+	(No symbol) [0x001393DD]
+	GetHandleVerifier [0x004DAABD+2539405]
+	GetHandleVerifier [0x0051A78F+2800735]
+	GetHandleVerifier [0x0051456C+2775612]
+	GetHandleVerifier [0x003051E0+616112]
+	(No symbol) [0x00215F8C]
+	(No symbol) [0x00212328]
+	(No symbol) [0x0021240B]
+	(No symbol) [0x00204FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+	(No symbol) [0x00000000]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0027A813+48355]
+	(No symbol) [0x0020C4B1]
+	(No symbol) [0x00115358]
+	(No symbol) [0x00131A9E]
+	(No symbol) [0x00130579]
+	(No symbol) [0x00160C55]
+	(No symbol) [0x0016093C]
+	(No symbol) [0x0015A536]
+	(No symbol) [0x001382DC]
+	(No symbol) [0x001393DD]
+	GetHandleVerifier [0x004DAABD+2539405]
+	GetHandleVerifier [0x0051A78F+2800735]
+	GetHandleVerifier [0x0051456C+2775612]
+	GetHandleVerifier [0x003051E0+616112]
+	(No symbol) [0x00215F8C]
+	(No symbol) [0x00212328]
+	(No symbol) [0x0021240B]
+	(No symbol) [0x00204FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+	(No symbol) [0x00000000]
+
+2025-06-10 17:41:44,943 - WARNING - Telegram не настроен в config.py
+2025-06-10 17:41:44,943 - INFO - Попытка регистрации на игру: 15 июня, Воскресенье Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (available)
+2025-06-10 17:41:44,943 - INFO - 
+
+2025-06-10 17:41:44,944 - INFO - ====== WebDriver manager ======
+2025-06-10 17:41:45,671 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:41:45,671 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:41:45,671 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:41:46,127 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:41:47,985 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:41:50,740 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0121A813+48355]
+	(No symbol) [0x011AC4B1]
+	(No symbol) [0x010B5358]
+	(No symbol) [0x010D1A9E]
+	(No symbol) [0x010D0579]
+	(No symbol) [0x01100C55]
+	(No symbol) [0x0110093C]
+	(No symbol) [0x010FA536]
+	(No symbol) [0x010D82DC]
+	(No symbol) [0x010D93DD]
+	GetHandleVerifier [0x0147AABD+2539405]
+	GetHandleVerifier [0x014BA78F+2800735]
+	GetHandleVerifier [0x014B456C+2775612]
+	GetHandleVerifier [0x012A51E0+616112]
+	(No symbol) [0x011B5F8C]
+	(No symbol) [0x011B2328]
+	(No symbol) [0x011B240B]
+	(No symbol) [0x011A4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0121A813+48355]
+	(No symbol) [0x011AC4B1]
+	(No symbol) [0x010B5358]
+	(No symbol) [0x010D1A9E]
+	(No symbol) [0x010D0579]
+	(No symbol) [0x01100C55]
+	(No symbol) [0x0110093C]
+	(No symbol) [0x010FA536]
+	(No symbol) [0x010D82DC]
+	(No symbol) [0x010D93DD]
+	GetHandleVerifier [0x0147AABD+2539405]
+	GetHandleVerifier [0x014BA78F+2800735]
+	GetHandleVerifier [0x014B456C+2775612]
+	GetHandleVerifier [0x012A51E0+616112]
+	(No symbol) [0x011B5F8C]
+	(No symbol) [0x011B2328]
+	(No symbol) [0x011B240B]
+	(No symbol) [0x011A4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:41:50,763 - WARNING - Telegram не настроен в config.py
+2025-06-10 17:46:50,765 - INFO - Проверка доступных игр (17:46:50)
+2025-06-10 17:46:51,737 - INFO - Найдено доступных игр: 2
+2025-06-10 17:46:51,737 - INFO - Найдено 2 подходящих игр
+2025-06-10 17:46:51,738 - INFO - Попытка регистрации на игру: 10 июня, Вторник Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (reserve)
+2025-06-10 17:46:51,738 - INFO - 
+
+2025-06-10 17:46:51,738 - INFO - ====== WebDriver manager ======
+2025-06-10 17:46:52,744 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:46:52,744 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:46:52,745 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:46:53,390 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:46:55,441 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:46:58,312 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0034A813+48355]
+	(No symbol) [0x002DC4B1]
+	(No symbol) [0x001E5358]
+	(No symbol) [0x00201A9E]
+	(No symbol) [0x00200579]
+	(No symbol) [0x00230C55]
+	(No symbol) [0x0023093C]
+	(No symbol) [0x0022A536]
+	(No symbol) [0x002082DC]
+	(No symbol) [0x002093DD]
+	GetHandleVerifier [0x005AAABD+2539405]
+	GetHandleVerifier [0x005EA78F+2800735]
+	GetHandleVerifier [0x005E456C+2775612]
+	GetHandleVerifier [0x003D51E0+616112]
+	(No symbol) [0x002E5F8C]
+	(No symbol) [0x002E2328]
+	(No symbol) [0x002E240B]
+	(No symbol) [0x002D4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0034A813+48355]
+	(No symbol) [0x002DC4B1]
+	(No symbol) [0x001E5358]
+	(No symbol) [0x00201A9E]
+	(No symbol) [0x00200579]
+	(No symbol) [0x00230C55]
+	(No symbol) [0x0023093C]
+	(No symbol) [0x0022A536]
+	(No symbol) [0x002082DC]
+	(No symbol) [0x002093DD]
+	GetHandleVerifier [0x005AAABD+2539405]
+	GetHandleVerifier [0x005EA78F+2800735]
+	GetHandleVerifier [0x005E456C+2775612]
+	GetHandleVerifier [0x003D51E0+616112]
+	(No symbol) [0x002E5F8C]
+	(No symbol) [0x002E2328]
+	(No symbol) [0x002E240B]
+	(No symbol) [0x002D4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:46:58,319 - WARNING - Telegram не настроен в config.py
+2025-06-10 17:46:58,319 - INFO - Попытка регистрации на игру: 15 июня, Воскресенье Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (available)
+2025-06-10 17:46:58,320 - INFO - 
+
+2025-06-10 17:46:58,320 - INFO - ====== WebDriver manager ======
+2025-06-10 17:46:59,057 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:46:59,057 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:46:59,058 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:46:59,653 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:47:01,475 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:47:04,219 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x004CA813+48355]
+	(No symbol) [0x0045C4B1]
+	(No symbol) [0x00365358]
+	(No symbol) [0x00381A9E]
+	(No symbol) [0x00380579]
+	(No symbol) [0x003B0C55]
+	(No symbol) [0x003B093C]
+	(No symbol) [0x003AA536]
+	(No symbol) [0x003882DC]
+	(No symbol) [0x003893DD]
+	GetHandleVerifier [0x0072AABD+2539405]
+	GetHandleVerifier [0x0076A78F+2800735]
+	GetHandleVerifier [0x0076456C+2775612]
+	GetHandleVerifier [0x005551E0+616112]
+	(No symbol) [0x00465F8C]
+	(No symbol) [0x00462328]
+	(No symbol) [0x0046240B]
+	(No symbol) [0x00454FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x004CA813+48355]
+	(No symbol) [0x0045C4B1]
+	(No symbol) [0x00365358]
+	(No symbol) [0x00381A9E]
+	(No symbol) [0x00380579]
+	(No symbol) [0x003B0C55]
+	(No symbol) [0x003B093C]
+	(No symbol) [0x003AA536]
+	(No symbol) [0x003882DC]
+	(No symbol) [0x003893DD]
+	GetHandleVerifier [0x0072AABD+2539405]
+	GetHandleVerifier [0x0076A78F+2800735]
+	GetHandleVerifier [0x0076456C+2775612]
+	GetHandleVerifier [0x005551E0+616112]
+	(No symbol) [0x00465F8C]
+	(No symbol) [0x00462328]
+	(No symbol) [0x0046240B]
+	(No symbol) [0x00454FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:47:04,223 - WARNING - Telegram не настроен в config.py
+2025-06-10 17:52:04,225 - INFO - Проверка доступных игр (17:52:04)
+2025-06-10 17:52:05,498 - INFO - Найдено доступных игр: 2
+2025-06-10 17:52:05,499 - INFO - Найдено 2 подходящих игр
+2025-06-10 17:52:05,499 - INFO - Попытка регистрации на игру: 10 июня, Вторник Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (reserve)
+2025-06-10 17:52:05,499 - INFO - 
+
+2025-06-10 17:52:05,499 - INFO - ====== WebDriver manager ======
+2025-06-10 17:52:06,575 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:52:06,575 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:52:06,576 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:52:07,213 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:52:09,102 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:52:11,960 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0038A813+48355]
+	(No symbol) [0x0031C4B1]
+	(No symbol) [0x00225358]
+	(No symbol) [0x00241A9E]
+	(No symbol) [0x00240579]
+	(No symbol) [0x00270C55]
+	(No symbol) [0x0027093C]
+	(No symbol) [0x0026A536]
+	(No symbol) [0x002482DC]
+	(No symbol) [0x002493DD]
+	GetHandleVerifier [0x005EAABD+2539405]
+	GetHandleVerifier [0x0062A78F+2800735]
+	GetHandleVerifier [0x0062456C+2775612]
+	GetHandleVerifier [0x004151E0+616112]
+	(No symbol) [0x00325F8C]
+	(No symbol) [0x00322328]
+	(No symbol) [0x0032240B]
+	(No symbol) [0x00314FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0038A813+48355]
+	(No symbol) [0x0031C4B1]
+	(No symbol) [0x00225358]
+	(No symbol) [0x00241A9E]
+	(No symbol) [0x00240579]
+	(No symbol) [0x00270C55]
+	(No symbol) [0x0027093C]
+	(No symbol) [0x0026A536]
+	(No symbol) [0x002482DC]
+	(No symbol) [0x002493DD]
+	GetHandleVerifier [0x005EAABD+2539405]
+	GetHandleVerifier [0x0062A78F+2800735]
+	GetHandleVerifier [0x0062456C+2775612]
+	GetHandleVerifier [0x004151E0+616112]
+	(No symbol) [0x00325F8C]
+	(No symbol) [0x00322328]
+	(No symbol) [0x0032240B]
+	(No symbol) [0x00314FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:52:11,972 - WARNING - Telegram не настроен в config.py
+2025-06-10 17:52:11,973 - INFO - Попытка регистрации на игру: 15 июня, Воскресенье Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (available)
+2025-06-10 17:52:11,974 - INFO - 
+
+2025-06-10 17:52:11,975 - INFO - ====== WebDriver manager ======
+2025-06-10 17:52:13,013 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:52:13,014 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:52:13,014 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:52:13,906 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:52:16,012 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:52:18,885 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00A9A813+48355]
+	(No symbol) [0x00A2C4B1]
+	(No symbol) [0x00935358]
+	(No symbol) [0x00951A9E]
+	(No symbol) [0x00950579]
+	(No symbol) [0x00980C55]
+	(No symbol) [0x0098093C]
+	(No symbol) [0x0097A536]
+	(No symbol) [0x009582DC]
+	(No symbol) [0x009593DD]
+	GetHandleVerifier [0x00CFAABD+2539405]
+	GetHandleVerifier [0x00D3A78F+2800735]
+	GetHandleVerifier [0x00D3456C+2775612]
+	GetHandleVerifier [0x00B251E0+616112]
+	(No symbol) [0x00A35F8C]
+	(No symbol) [0x00A32328]
+	(No symbol) [0x00A3240B]
+	(No symbol) [0x00A24FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00A9A813+48355]
+	(No symbol) [0x00A2C4B1]
+	(No symbol) [0x00935358]
+	(No symbol) [0x00951A9E]
+	(No symbol) [0x00950579]
+	(No symbol) [0x00980C55]
+	(No symbol) [0x0098093C]
+	(No symbol) [0x0097A536]
+	(No symbol) [0x009582DC]
+	(No symbol) [0x009593DD]
+	GetHandleVerifier [0x00CFAABD+2539405]
+	GetHandleVerifier [0x00D3A78F+2800735]
+	GetHandleVerifier [0x00D3456C+2775612]
+	GetHandleVerifier [0x00B251E0+616112]
+	(No symbol) [0x00A35F8C]
+	(No symbol) [0x00A32328]
+	(No symbol) [0x00A3240B]
+	(No symbol) [0x00A24FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:52:18,890 - WARNING - Telegram не настроен в config.py
+2025-06-10 17:57:18,892 - INFO - Проверка доступных игр (17:57:18)
+2025-06-10 17:57:20,012 - INFO - Найдено доступных игр: 2
+2025-06-10 17:57:20,013 - INFO - Найдено 2 подходящих игр
+2025-06-10 17:57:20,013 - INFO - Попытка регистрации на игру: 10 июня, Вторник Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (reserve)
+2025-06-10 17:57:20,013 - INFO - 
+
+2025-06-10 17:57:20,015 - INFO - ====== WebDriver manager ======
+2025-06-10 17:57:21,319 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:57:21,319 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:57:21,319 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:57:21,921 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:57:23,512 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:57:26,241 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0085A813+48355]
+	(No symbol) [0x007EC4B1]
+	(No symbol) [0x006F5358]
+	(No symbol) [0x00711A9E]
+	(No symbol) [0x00710579]
+	(No symbol) [0x00740C55]
+	(No symbol) [0x0074093C]
+	(No symbol) [0x0073A536]
+	(No symbol) [0x007182DC]
+	(No symbol) [0x007193DD]
+	GetHandleVerifier [0x00ABAABD+2539405]
+	GetHandleVerifier [0x00AFA78F+2800735]
+	GetHandleVerifier [0x00AF456C+2775612]
+	GetHandleVerifier [0x008E51E0+616112]
+	(No symbol) [0x007F5F8C]
+	(No symbol) [0x007F2328]
+	(No symbol) [0x007F240B]
+	(No symbol) [0x007E4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0085A813+48355]
+	(No symbol) [0x007EC4B1]
+	(No symbol) [0x006F5358]
+	(No symbol) [0x00711A9E]
+	(No symbol) [0x00710579]
+	(No symbol) [0x00740C55]
+	(No symbol) [0x0074093C]
+	(No symbol) [0x0073A536]
+	(No symbol) [0x007182DC]
+	(No symbol) [0x007193DD]
+	GetHandleVerifier [0x00ABAABD+2539405]
+	GetHandleVerifier [0x00AFA78F+2800735]
+	GetHandleVerifier [0x00AF456C+2775612]
+	GetHandleVerifier [0x008E51E0+616112]
+	(No symbol) [0x007F5F8C]
+	(No symbol) [0x007F2328]
+	(No symbol) [0x007F240B]
+	(No symbol) [0x007E4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:57:26,248 - WARNING - Telegram не настроен в config.py
+2025-06-10 17:57:26,248 - INFO - Попытка регистрации на игру: 15 июня, Воскресенье Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (available)
+2025-06-10 17:57:26,249 - INFO - 
+
+2025-06-10 17:57:26,250 - INFO - ====== WebDriver manager ======
+2025-06-10 17:57:27,049 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 17:57:27,049 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 17:57:27,050 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 17:57:27,709 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 17:57:29,355 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 17:57:32,316 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0085A813+48355]
+	(No symbol) [0x007EC4B1]
+	(No symbol) [0x006F5358]
+	(No symbol) [0x00711A9E]
+	(No symbol) [0x00710579]
+	(No symbol) [0x00740C55]
+	(No symbol) [0x0074093C]
+	(No symbol) [0x0073A536]
+	(No symbol) [0x007182DC]
+	(No symbol) [0x007193DD]
+	GetHandleVerifier [0x00ABAABD+2539405]
+	GetHandleVerifier [0x00AFA78F+2800735]
+	GetHandleVerifier [0x00AF456C+2775612]
+	GetHandleVerifier [0x008E51E0+616112]
+	(No symbol) [0x007F5F8C]
+	(No symbol) [0x007F2328]
+	(No symbol) [0x007F240B]
+	(No symbol) [0x007E4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0085A813+48355]
+	(No symbol) [0x007EC4B1]
+	(No symbol) [0x006F5358]
+	(No symbol) [0x00711A9E]
+	(No symbol) [0x00710579]
+	(No symbol) [0x00740C55]
+	(No symbol) [0x0074093C]
+	(No symbol) [0x0073A536]
+	(No symbol) [0x007182DC]
+	(No symbol) [0x007193DD]
+	GetHandleVerifier [0x00ABAABD+2539405]
+	GetHandleVerifier [0x00AFA78F+2800735]
+	GetHandleVerifier [0x00AF456C+2775612]
+	GetHandleVerifier [0x008E51E0+616112]
+	(No symbol) [0x007F5F8C]
+	(No symbol) [0x007F2328]
+	(No symbol) [0x007F240B]
+	(No symbol) [0x007E4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 17:57:32,325 - WARNING - Telegram не настроен в config.py
+2025-06-10 18:02:32,326 - INFO - Проверка доступных игр (18:02:32)
+2025-06-10 18:02:33,392 - INFO - Найдено доступных игр: 2
+2025-06-10 18:02:33,392 - INFO - Найдено 2 подходящих игр
+2025-06-10 18:02:33,393 - INFO - Попытка регистрации на игру: 10 июня, Вторник Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (reserve)
+2025-06-10 18:02:33,394 - INFO - 
+
+2025-06-10 18:02:33,395 - INFO - ====== WebDriver manager ======
+2025-06-10 18:02:34,512 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 18:02:34,513 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 18:02:34,513 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 18:02:35,161 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 18:02:37,287 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 18:02:40,176 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0074A813+48355]
+	(No symbol) [0x006DC4B1]
+	(No symbol) [0x005E5358]
+	(No symbol) [0x00601A9E]
+	(No symbol) [0x00600579]
+	(No symbol) [0x00630C55]
+	(No symbol) [0x0063093C]
+	(No symbol) [0x0062A536]
+	(No symbol) [0x006082DC]
+	(No symbol) [0x006093DD]
+	GetHandleVerifier [0x009AAABD+2539405]
+	GetHandleVerifier [0x009EA78F+2800735]
+	GetHandleVerifier [0x009E456C+2775612]
+	GetHandleVerifier [0x007D51E0+616112]
+	(No symbol) [0x006E5F8C]
+	(No symbol) [0x006E2328]
+	(No symbol) [0x006E240B]
+	(No symbol) [0x006D4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0074A813+48355]
+	(No symbol) [0x006DC4B1]
+	(No symbol) [0x005E5358]
+	(No symbol) [0x00601A9E]
+	(No symbol) [0x00600579]
+	(No symbol) [0x00630C55]
+	(No symbol) [0x0063093C]
+	(No symbol) [0x0062A536]
+	(No symbol) [0x006082DC]
+	(No symbol) [0x006093DD]
+	GetHandleVerifier [0x009AAABD+2539405]
+	GetHandleVerifier [0x009EA78F+2800735]
+	GetHandleVerifier [0x009E456C+2775612]
+	GetHandleVerifier [0x007D51E0+616112]
+	(No symbol) [0x006E5F8C]
+	(No symbol) [0x006E2328]
+	(No symbol) [0x006E240B]
+	(No symbol) [0x006D4FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 18:02:40,180 - WARNING - Telegram не настроен в config.py
+2025-06-10 18:02:40,182 - INFO - Попытка регистрации на игру: 15 июня, Воскресенье Классическая игра с вопросами на всевозможные темы. Здесь реально может пригодиться любое знание, которое вы получали в жизни! (available)
+2025-06-10 18:02:40,183 - INFO - 
+
+2025-06-10 18:02:40,184 - INFO - ====== WebDriver manager ======
+2025-06-10 18:02:41,259 - INFO - Could not get version for google-chrome with the command:  powershell "$ErrorActionPreference='silentlycontinue' ; (Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion ; if (-not $? -or $? -match $error) { (Get-Item -Path "$env:PROGRAMFILES(x86)\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { (Get-Item -Path "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion } if (-not $? -or $? -match $error) { reg query "HKCU\SOFTWARE\Google\Chrome\BLBeacon" /v version } if (-not $? -or $? -match $error) { reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome" /v version }"
+2025-06-10 18:02:41,259 - INFO - Current google-chrome version is UNKNOWN
+2025-06-10 18:02:41,260 - INFO - Get LATEST chromedriver version for UNKNOWN google-chrome
+2025-06-10 18:02:42,095 - INFO - Trying to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+2025-06-10 18:02:44,057 - INFO - Driver has been saved in cache [C:\Users\nebus\.wdm\drivers\chromedriver\win32\114.0.5735.90]
+2025-06-10 18:02:46,794 - ERROR - Ошибка при регистрации: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x006CA813+48355]
+	(No symbol) [0x0065C4B1]
+	(No symbol) [0x00565358]
+	(No symbol) [0x00581A9E]
+	(No symbol) [0x00580579]
+	(No symbol) [0x005B0C55]
+	(No symbol) [0x005B093C]
+	(No symbol) [0x005AA536]
+	(No symbol) [0x005882DC]
+	(No symbol) [0x005893DD]
+	GetHandleVerifier [0x0092AABD+2539405]
+	GetHandleVerifier [0x0096A78F+2800735]
+	GetHandleVerifier [0x0096456C+2775612]
+	GetHandleVerifier [0x007551E0+616112]
+	(No symbol) [0x00665F8C]
+	(No symbol) [0x00662328]
+	(No symbol) [0x0066240B]
+	(No symbol) [0x00654FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+Traceback (most recent call last):
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\parser.py", line 110, in register_to_game
+    driver = init_webdriver()
+  File "C:\Users\nebus\Netology\quizplease_autoreg\src\webdriver.py", line 40, in init_webdriver
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(),
+        options=options
+    )
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chrome\webdriver.py", line 70, in __init__
+    super(WebDriver, self).__init__(DesiredCapabilities.CHROME['browserName'], "goog",
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    port, options,
+                                    ^^^^^^^^^^^^^^
+                                    service_args, desired_capabilities,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    service_log_path, service, keep_alive)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\chromium\webdriver.py", line 93, in __init__
+    RemoteWebDriver.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<3 lines>...
+            keep_alive=keep_alive, ignore_proxy=_ignore_proxy),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        options=options)
+        ^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 268, in __init__
+    self.start_session(capabilities, browser_profile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 359, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 424, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\nebus\AppData\Roaming\Python\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 247, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x006CA813+48355]
+	(No symbol) [0x0065C4B1]
+	(No symbol) [0x00565358]
+	(No symbol) [0x00581A9E]
+	(No symbol) [0x00580579]
+	(No symbol) [0x005B0C55]
+	(No symbol) [0x005B093C]
+	(No symbol) [0x005AA536]
+	(No symbol) [0x005882DC]
+	(No symbol) [0x005893DD]
+	GetHandleVerifier [0x0092AABD+2539405]
+	GetHandleVerifier [0x0096A78F+2800735]
+	GetHandleVerifier [0x0096456C+2775612]
+	GetHandleVerifier [0x007551E0+616112]
+	(No symbol) [0x00665F8C]
+	(No symbol) [0x00662328]
+	(No symbol) [0x0066240B]
+	(No symbol) [0x00654FF7]
+	BaseThreadInitThunk [0x76445D49+25]
+	RtlInitializeExceptionChain [0x774BD03B+107]
+	RtlGetAppContainerNamedObjectPath [0x774BCFC1+561]
+
+2025-06-10 18:02:46,800 - WARNING - Telegram не настроен в config.py
