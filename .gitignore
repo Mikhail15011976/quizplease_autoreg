@@ -1,0 +1,25 @@
+# Конфиденциальные данные
+src/config.py
+*.env
+.env.local
+secrets.txt
+
+# Данные проекта
+data/
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
