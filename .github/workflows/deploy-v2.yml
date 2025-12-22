@@ -1,0 +1,58 @@
+name: Deploy v2
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup SSH
+      env:
+        SSH_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
+        HOST: ${{ secrets.SERVER_HOST }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_KEY" > ~/.ssh/key
+        chmod 600 ~/.ssh/key
+        echo "Host $HOST" >> ~/.ssh/config
+        echo "  IdentityFile ~/.ssh/key" >> ~/.ssh/config
+        echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+    
+    - name: Deploy to Server
+      env:
+        HOST: ${{ secrets.SERVER_HOST }}
+        USER: ${{ secrets.SERVER_USER }}
+      run: |
+        echo "Deploying to $HOST..."
+        
+        ssh $USER@$HOST '
+          set -e
+          cd /opt/quizplease-autoreg
+          
+          echo "1. Pulling latest code..."
+          git fetch origin
+          git checkout main
+          git reset --hard origin/main
+          
+          echo "2. Activating venv..."
+          source venv/bin/activate
+          
+          echo "3. Installing dependencies..."
+          pip install -r requirements.txt
+          
+          echo "4. Reloading systemd..."
+          sudo -n systemctl daemon-reload
+          
+          echo "5. Restarting service..."
+          sudo -n systemctl restart quizplease-autoreg
+          
+          echo "6. Checking status..."
+          sudo -n systemctl status quizplease-autoreg --no-pager | head -3
+          
+          echo "✅ Deployment successful!"
+        '
