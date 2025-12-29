@@ -85,7 +85,7 @@ jobs:
           echo 'Running test command...'
           cd /opt/quizplease-autoreg
           source venv/bin/activate
-          python -c "import sys; print('✅ Python works:', sys.version)" 2>&1 | head -1
+          python -c \"import sys; print('Python version:', sys.version[:20])\"
           
           echo ''
           echo '🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!'
