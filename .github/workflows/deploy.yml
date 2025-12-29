@@ -11,54 +11,87 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup SSH
+    - name: Setup SSH Connection
       env:
         SSH_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
         HOST: ${{ secrets.SERVER_HOST }}
-      run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_KEY" > ~/.ssh/key
-        chmod 600 ~/.ssh/key
-        echo "Host $HOST" >> ~/.ssh/config
-        echo "  IdentityFile ~/.ssh/key" >> ~/.ssh/config
-        echo "  StrictHostKeyChecking no" >> ~/.ssh/config
-    
-    - name: Deploy to Server
-      env:
-        HOST: ${{ secrets.SERVER_HOST }}
         USER: ${{ secrets.SERVER_USER }}
       run: |
-        echo "🚀 Deploying to $HOST..."
+        mkdir -p ~/.ssh
+        echo "$SSH_KEY" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
         
-        # Безопасное выполнение команд через SSH с sudo
-        ssh $USER@$HOST '
-          set -e  # Прерывать при ошибке
+        cat > ~/.ssh/config << EOF
+        Host deploy-server
+          HostName $HOST
+          User $USER
+          IdentityFile ~/.ssh/deploy_key
+          StrictHostKeyChecking no
+          UserKnownHostsFile /dev/null
+        EOF
+    
+    - name: Clean and Deploy
+      run: |
+        echo "🚀 Starting clean deployment..."
+        
+        ssh deploy-server "
+          set -e
+          echo '=== DEPLOYMENT STARTED ==='
+          echo 'Time: \$(date)'
           
-          echo "1. Updating code in /opt/quizplease-autoreg..."
+          echo ''
+          echo '🧹 Step 1: Cleaning Git state'
           cd /opt/quizplease-autoreg
           
-          echo "2. Pulling latest changes..."
-          git fetch origin
-          git checkout main
-          git reset --hard origin/main
+          # Сохраняем любые локальные изменения (на всякий случай)
+          git stash
           
-          echo "3. Activating virtual environment..."
+          # Очищаем все неотслеживаемые файлы
+          git clean -fd
+          
+          # Сбрасываем все изменения
+          git reset --hard
+          
+          echo ''
+          echo '🔄 Step 2: Fetching latest code'
+          # Принудительно обновляем все ссылки
+          git fetch origin --force
+          
+          # Переключаемся на main и сбрасываем
+          git checkout main --force
+          git reset --hard origin/main --recurse-submodules
+          
+          echo 'Latest commit:'
+          git log --oneline -1
+          
+          echo ''
+          echo '📦 Step 3: Updating dependencies'
           source venv/bin/activate
-          
-          echo "4. Installing dependencies..."
+          pip install --upgrade pip
           pip install -r requirements.txt
           
-          echo "5. Fixing permissions..."
-          # Убедимся, что у нас есть права на файлы
-          chmod +x src/*.py
-          
-          echo "6. Restarting service as root..."
-          # Перезапуск сервиса через sudo
+          echo ''
+          echo '⚙️ Step 4: Restarting service'
           sudo systemctl daemon-reload
           sudo systemctl restart quizplease-autoreg
           
-          echo "7. Checking service status..."
-          sudo systemctl status quizplease-autoreg --no-pager | head -20
+          echo ''
+          echo '✅ Step 5: Verification'
+          sleep 3
           
-          echo "✅ Deployment completed successfully!"
-        '
+          echo 'Service status:'
+          SYSTEMCTL_STATUS=\$(sudo systemctl status quizplease-autoreg --no-pager | head -5)
+          echo \"\$SYSTEMCTL_STATUS\"
+          
+          if sudo systemctl is-active quizplease-autoreg >/dev/null 2>&1; then
+            echo '🟢 Service is ACTIVE and RUNNING'
+            echo ''
+            echo '🎉 DEPLOYMENT SUCCESSFUL!'
+            echo 'Completed at: \$(date)'
+          else
+            echo '🔴 Service FAILED to start'
+            echo 'Last 10 log lines:'
+            sudo journalctl -u quizplease-autoreg -n 10 --no-pager
+            exit 1
+          fi
+        "
