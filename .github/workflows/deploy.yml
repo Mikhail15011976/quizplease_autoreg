@@ -11,36 +11,65 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Deploy Code
+    - name: Setup SSH
       env:
         SSH_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
         HOST: ${{ secrets.SERVER_HOST }}
-        USER: ${{ secrets.SERVER_USER }}
       run: |
         mkdir -p ~/.ssh
         echo "$SSH_KEY" > ~/.ssh/key
         chmod 600 ~/.ssh/key
         
-        # Используем heredoc для передачи скрипта
-        ssh -i ~/.ssh/key $USER@$HOST << 'EOF'
-        set -e
-        
-        echo "🔄 Starting deployment..."
-        
-        cd /opt/quizplease-autoreg
-        
-        echo "1. Pulling latest code..."
-        git fetch origin
-        git reset --hard origin/main
-        
-        echo "2. Updating dependencies..."
-        source venv/bin/activate
-        pip install -r requirements.txt
-        
-        echo "3. Reloading systemd..."
-        sudo systemctl daemon-reload
-        
-        echo "✅ Deployment successful!"
-        echo "Latest commit: $(git log --oneline -1)"
-        echo "Completed at: $(date)"
+        cat > ~/.ssh/config << EOF
+        Host server
+          HostName $HOST
+          User mikhail
+          IdentityFile ~/.ssh/key
+          StrictHostKeyChecking no
         EOF
+    
+    - name: Deploy Application
+      run: |
+        echo "🚀 Deploying QuizPlease Autoreg..."
+        
+        ssh server "
+          set -e
+          
+          echo '=== DEPLOYMENT STARTED ==='
+          echo 'Time: \$(date)'
+          
+          echo ''
+          echo '1. Updating source code...'
+          cd /opt/quizplease-autoreg
+          git fetch origin
+          git checkout main
+          git reset --hard origin/main
+          
+          echo 'Latest commit: \$(git log --oneline -1)'
+          
+          echo ''
+          echo '2. Installing Python dependencies...'
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          
+          echo ''
+          echo '3. Reloading systemd configuration...'
+          sudo systemctl daemon-reload
+          
+          echo ''
+          echo '4. Testing the script...'
+          echo 'Running one test execution:'
+          timeout 30 python src/extract_classic_games.py || echo 'Script completed'
+          
+          echo ''
+          echo '=== DEPLOYMENT COMPLETED ==='
+          echo '✅ Code updated successfully!'
+          echo ''
+          echo 'To run manually:'
+          echo '  cd /opt/quizplease-autoreg'
+          echo '  source venv/bin/activate'
+          echo '  python src/extract_classic_games.py'
+          echo ''
+          echo 'Completed at: \$(date)'
+        "
