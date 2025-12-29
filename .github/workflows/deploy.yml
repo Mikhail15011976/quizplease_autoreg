@@ -11,92 +11,36 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup SSH
+    - name: Deploy Code
       env:
         SSH_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
         HOST: ${{ secrets.SERVER_HOST }}
         USER: ${{ secrets.SERVER_USER }}
       run: |
         mkdir -p ~/.ssh
-        echo "$SSH_KEY" > ~/.ssh/deploy_key
-        chmod 600 ~/.ssh/deploy_key
+        echo "$SSH_KEY" > ~/.ssh/key
+        chmod 600 ~/.ssh/key
         
-        cat > ~/.ssh/config << EOF
-        Host deploy-server
-          HostName $HOST
-          User $USER
-          IdentityFile ~/.ssh/deploy_key
-          StrictHostKeyChecking no
-          UserKnownHostsFile /dev/null
+        # Используем heredoc для передачи скрипта
+        ssh -i ~/.ssh/key $USER@$HOST << 'EOF'
+        set -e
+        
+        echo "🔄 Starting deployment..."
+        
+        cd /opt/quizplease-autoreg
+        
+        echo "1. Pulling latest code..."
+        git fetch origin
+        git reset --hard origin/main
+        
+        echo "2. Updating dependencies..."
+        source venv/bin/activate
+        pip install -r requirements.txt
+        
+        echo "3. Reloading systemd..."
+        sudo systemctl daemon-reload
+        
+        echo "✅ Deployment successful!"
+        echo "Latest commit: $(git log --oneline -1)"
+        echo "Completed at: $(date)"
         EOF
-    
-    - name: Fix Git and Deploy
-      run: |
-        echo "🚀 Starting deployment with Git fix..."
-        
-        ssh deploy-server "
-          set -e
-          echo '=== STARTING DEPLOYMENT ==='
-          echo 'Time: \$(date)'
-          
-          echo ''
-          echo '🧹 Step 1: Fixing Git references...'
-          cd /opt/quizplease-autoreg
-          
-          # Сохраняем любые изменения
-          git stash 2>/dev/null || true
-          
-          # Очищаем все локальные изменения
-          git checkout -- .
-          git clean -fd
-          
-          # Удаляем проблемные ссылки
-          echo 'Cleaning Git refs...'
-          rm -f .git/refs/remotes/origin/main 2>/dev/null || true
-          rm -f .git/refs/heads/main 2>/dev/null || true
-          
-          # Очищаем Git кэш
-          git gc --prune=now
-          git remote prune origin
-          
-          echo ''
-          echo '🔄 Step 2: Forcing fresh pull...'
-          # Используем force для обновления
-          git fetch origin --force
-          
-          # Создаем новую ветку main
-          git checkout -B main origin/main --force
-          
-          echo 'Current commit:'
-          git log --oneline -1
-          
-          echo ''
-          echo '📦 Step 3: Installing dependencies...'
-          source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          
-          echo ''
-          echo '⚙️ Step 4: Reloading systemd...'
-          sudo systemctl daemon-reload
-          
-          echo ''
-          echo '✅ Step 5: Testing script...'
-          echo 'Running test command...'
-          cd /opt/quizplease-autoreg
-          source venv/bin/activate
-          python -c \"import sys; print('Python version:', sys.version[:20])\"
-          
-          echo ''
-          echo '🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!'
-          echo 'Time: \$(date)'
-          echo ''
-          echo 'To run manually:'
-          echo '  cd /opt/quizplease-autoreg'
-          echo '  source venv/bin/activate'
-          echo '  python src/extract_classic_games.py'
-          
-          echo ''
-          echo 'Systemd service status:'
-          sudo systemctl status quizplease-autoreg --no-pager | head -10
-        "
