@@ -1,0 +1,72 @@
+name: Fix Git on Server
+
+on:
+  workflow_dispatch:  # Только ручной запуск
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Fix Git Issues
+      env:
+        SSH_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
+        HOST: ${{ secrets.SERVER_HOST }}
+        USER: ${{ secrets.SERVER_USER }}
+      run: |
+        echo "🔧 Fixing Git issues on server..."
+        
+        mkdir -p ~/.ssh
+        echo "$SSH_KEY" > ~/.ssh/fix_key
+        chmod 600 ~/.ssh/fix_key
+        
+        ssh -i ~/.ssh/fix_key $USER@$HOST "
+          echo '=== GIT REPAIR SCRIPT ==='
+          echo 'Working directory: /opt/quizplease-autoreg'
+          cd /opt/quizplease-autoreg
+          
+          echo ''
+          echo '1. Backup current state...'
+          BACKUP_DIR=\"/tmp/quizplease-backup-\$(date +%Y%m%d-%H%M%S)\"
+          cp -r . \"\$BACKUP_DIR\" 2>/dev/null || echo 'Backup skipped'
+          
+          echo ''
+          echo '2. Stash any changes...'
+          git stash
+          
+          echo ''
+          echo '3. Remove problematic refs...'
+          rm -f .git/refs/remotes/origin/main
+          rm -f .git/refs/heads/main
+          
+          echo ''
+          echo '4. Clean and reset...'
+          git checkout -- .
+          git clean -fd
+          git gc --prune=now
+          
+          echo ''
+          echo '5. Fetch fresh...'
+          git fetch origin --force
+          
+          echo ''
+          echo '6. Reset to origin/main...'
+          git checkout -B main origin/main --force
+          
+          echo ''
+          echo '7. Verify...'
+          echo 'Remote:'
+          git remote -v
+          echo ''
+          echo 'Status:'
+          git status --short
+          echo ''
+          echo 'Latest commit:'
+          git log --oneline -1
+          
+          echo ''
+          echo '✅ Git修复完成!'
+          echo 'Backup saved to: \$BACKUP_DIR'
+        "

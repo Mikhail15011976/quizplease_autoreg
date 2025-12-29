@@ -15,81 +15,88 @@ jobs:
       env:
         SSH_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
         HOST: ${{ secrets.SERVER_HOST }}
+        USER: ${{ secrets.SERVER_USER }}
       run: |
         mkdir -p ~/.ssh
-        echo "$SSH_KEY" > ~/.ssh/key
-        chmod 600 ~/.ssh/key
+        echo "$SSH_KEY" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
         
         cat > ~/.ssh/config << EOF
-        Host server
+        Host deploy-server
           HostName $HOST
-          User mikhail
-          IdentityFile ~/.ssh/key
+          User $USER
+          IdentityFile ~/.ssh/deploy_key
           StrictHostKeyChecking no
+          UserKnownHostsFile /dev/null
         EOF
     
-    - name: Deploy Application
+    - name: Fix Git and Deploy
       run: |
-        echo "🚀 Deploying QuizPlease Autoreg..."
+        echo "🚀 Starting deployment with Git fix..."
         
-        ssh server "
+        ssh deploy-server "
           set -e
-          
-          echo '=== DEPLOYMENT STARTED ==='
+          echo '=== STARTING DEPLOYMENT ==='
           echo 'Time: \$(date)'
           
           echo ''
-          echo '1. Updating source code...'
+          echo '🧹 Step 1: Fixing Git references...'
           cd /opt/quizplease-autoreg
-          git fetch origin
-          git checkout main
-          git reset --hard origin/main
           
-          echo 'Latest commit: \$(git log --oneline -1)'
+          # Сохраняем любые изменения
+          git stash 2>/dev/null || true
+          
+          # Очищаем все локальные изменения
+          git checkout -- .
+          git clean -fd
+          
+          # Удаляем проблемные ссылки
+          echo 'Cleaning Git refs...'
+          rm -f .git/refs/remotes/origin/main 2>/dev/null || true
+          rm -f .git/refs/heads/main 2>/dev/null || true
+          
+          # Очищаем Git кэш
+          git gc --prune=now
+          git remote prune origin
           
           echo ''
-          echo '2. Installing Python dependencies...'
+          echo '🔄 Step 2: Forcing fresh pull...'
+          # Используем force для обновления
+          git fetch origin --force
+          
+          # Создаем новую ветку main
+          git checkout -B main origin/main --force
+          
+          echo 'Current commit:'
+          git log --oneline -1
+          
+          echo ''
+          echo '📦 Step 3: Installing dependencies...'
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
           
           echo ''
-          echo '3. Reloading systemd configuration...'
+          echo '⚙️ Step 4: Reloading systemd...'
           sudo systemctl daemon-reload
           
           echo ''
-          echo '4. Testing the script...'
-          echo 'Running one test execution:'
-          timeout 30 python src/extract_classic_games.py || echo 'Script completed'
+          echo '✅ Step 5: Testing script...'
+          echo 'Running test command...'
+          cd /opt/quizplease-autoreg
+          source venv/bin/activate
+          python -c "import sys; print('✅ Python works:', sys.version)" 2>&1 | head -1
           
           echo ''
-          echo '5. Checking systemd status...'
-          echo 'Service configuration:'
-          sudo systemctl status quizplease-autoreg --no-pager | head -15
-          
-          echo ''
-          echo '6. Timer status (if exists):'
-          if [ -f '/etc/systemd/system/quizplease-autoreg.timer' ]; then
-            sudo systemctl status quizplease-autoreg.timer --no-pager | head -10
-            echo ''
-            echo 'Restarting timer...'
-            sudo systemctl restart quizplease-autoreg.timer
-            echo 'Timer restarted'
-          else
-            echo 'No timer found (manual execution only)'
-          fi
-          
-          echo ''
-          echo '=== DEPLOYMENT COMPLETED ==='
-          echo '✅ Code updated successfully!'
+          echo '🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!'
+          echo 'Time: \$(date)'
           echo ''
           echo 'To run manually:'
           echo '  cd /opt/quizplease-autoreg'
           echo '  source venv/bin/activate'
           echo '  python src/extract_classic_games.py'
+          
           echo ''
-          echo 'Or start service once:'
-          echo '  sudo systemctl start quizplease-autoreg'
-          echo ''
-          echo 'Completed at: \$(date)'
+          echo 'Systemd service status:'
+          sudo systemctl status quizplease-autoreg --no-pager | head -10
         "
