@@ -7,10 +7,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v4
-
+    
     - name: Setup SSH
       env:
         SSH_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
@@ -22,32 +22,43 @@ jobs:
         echo "Host $HOST" >> ~/.ssh/config
         echo "  IdentityFile ~/.ssh/key" >> ~/.ssh/config
         echo "  StrictHostKeyChecking no" >> ~/.ssh/config
-
-    - name: Deploy
+    
+    - name: Deploy to Server
       env:
         HOST: ${{ secrets.SERVER_HOST }}
         USER: ${{ secrets.SERVER_USER }}
       run: |
         echo "🚀 Deploying to $HOST..."
-
+        
+        # Безопасное выполнение команд через SSH с sudo
         ssh $USER@$HOST '
-          set -e
+          set -e  # Прерывать при ошибке
+          
+          echo "1. Updating code in /opt/quizplease-autoreg..."
           cd /opt/quizplease-autoreg
-
-          echo "1. Updating code..."
+          
+          echo "2. Pulling latest changes..."
           git fetch origin
           git checkout main
           git reset --hard origin/main
-
-          echo "2. Updating dependencies..."
+          
+          echo "3. Activating virtual environment..."
           source venv/bin/activate
+          
+          echo "4. Installing dependencies..."
           pip install -r requirements.txt
-
-          echo "3. Reloading systemd..."
-          sudo -n systemctl daemon-reload
-
-          echo "4. Restarting service..."
-          sudo -n systemctl restart quizplease-autoreg
-
-          echo "✅ Service restarted successfully!"
+          
+          echo "5. Fixing permissions..."
+          # Убедимся, что у нас есть права на файлы
+          chmod +x src/*.py
+          
+          echo "6. Restarting service as root..."
+          # Перезапуск сервиса через sudo
+          sudo systemctl daemon-reload
+          sudo systemctl restart quizplease-autoreg
+          
+          echo "7. Checking service status..."
+          sudo systemctl status quizplease-autoreg --no-pager | head -20
+          
+          echo "✅ Deployment completed successfully!"
         '
